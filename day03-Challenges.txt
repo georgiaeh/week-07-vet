@@ -1,0 +1,37 @@
+--Challenge 01: Passed in associative array 5 times to create 5 new entries in owners table in homestead database
+$owner = new Owner([
+    "first_name" => "Alex",
+    "last_name" => "Kamal",
+    "telephone" => "07034034034",
+    "email" => "Alex@mars.com",
+    "address_1" => "20 Monks Rise",
+    "address_2" => "",
+    "town" => "Welwyn Garden City",
+    "postcode" => "AL8 7NF"
+]);
+
+--Challenge 03: Created full name method to return owners full name. Called on ownner with ID 1
+$owner = Owner::find(1)->fullName();
+
+--Challenge 04: Created full address method to return owners full address. Called on ownner with ID 1
+$owner = Owner::find(1)->fullAddress();
+
+--Challenge 05: Update address field (fixing a spelling mistake)
+$owner->address_1 = "1 Napier House";
+$owner->save();
+
+--Challenge 06: Create formattedPhoneNumber method
+$owner = Owner::find(1)->formattedPhoneNumber();
+
+--Challenge 07: Get back just the owners who live in Bristol
+$owners = Owner::where("town", "Bristol")->get();
+
+--Challenge 08: Get back the owners in alphabetical order of their last names
+$owners = Owner::orderBy("last_name")->get();
+
+--Challenge 09: Get back just the owners who have a telephone number starting with 078
+$owners = Owner::where("telephone", "like", "078%")->get();
+
+--Challenge 10: Databse seeeding
+OwnerSeeder calls OwnerFactory which creates an instance of Owner each time it is called. 
+To remove all test data from the table use in the database terminal: TRUNCATE TABLE `owners` -> Drops the table and then recreates it. 
