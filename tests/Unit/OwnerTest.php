@@ -14,7 +14,7 @@ class OwnerTest extends TestCase
    public function setUp() : void
    {
        parent::setUp();
-       
+
        $this->owner = Owner::create([
             "first_name" => "Testy",
             "last_name" => "McTestface",
@@ -38,5 +38,15 @@ class OwnerTest extends TestCase
         $this->assertTrue(Owner::emailExists("TEST@TEST.com"));
         $this->assertFalse(Owner::emailExists("notinthe@database.com"));
 
+    }
+
+    public function test_phone_is_valid_moblie_number()
+    {
+        $this->assertTrue(Owner::validPhoneNumber('07847896918'));
+        $this->assertTrue(Owner::validPhoneNumber('+4407847896918')); //valid international number
+        $this->assertFalse(Owner::validPhoneNumber('07847896')); //too short
+        $this->assertFalse(Owner::validPhoneNumber('09847896918')); //starts 09
+        $this->assertFalse(Owner::validPhoneNumber('aaa07847896918')); //conatins letters
+        $this->assertFalse(Owner::validPhoneNumber('078478969189')); // too long
     }
 }
