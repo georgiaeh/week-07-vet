@@ -33,5 +33,6 @@ $owners = Owner::orderBy("last_name")->get();
 $owners = Owner::where("telephone", "like", "078%")->get();
 
 --Challenge 10: Databse seeeding
+To seed the databse: artisan db:seed --class=OwnerSeeder
 OwnerSeeder calls OwnerFactory which creates an instance of Owner each time it is called. 
 To remove all test data from the table use in the database terminal: TRUNCATE TABLE `owners` -> Drops the table and then recreates it. 
