@@ -15,6 +15,23 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/owners', [OwnerController::class, "index"]);
-Route::get('/owners/{owner}', [OwnerController::class, "show"]);
+Route::group(["prefix" => "owners"] , function () {
+    Route::group(["middleware" => "auth"], function(){//protects the following routes, have to be authenticates to access them
+        Route::get('', [OwnerController::class, "index"]);
+        Route::get('create', [OwnerController::class, "create"]);
+        Route::post('create', [OwnerController::class, "createPost"]);
+        Route::get('search', [OwnerController::class, "search"]);
+        Route::get('{owner}', [OwnerController::class, "show"]);
+        Route::get('{owner}/edit', [OwnerController::class, "edit"]);
+        Route::post('{owner}/edit', [OwnerController::class, "editPost"]);  
+    });
+});
+ 
+
+
+
 Route::get('/', [HomeController::class, "index"]);
+
+Auth::routes(['register'=>false]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -15,4 +15,8 @@
     <h6> No records found </h6>
 @endif
 
-{{ $owners->links("pagination::bootstrap-4") }}
+@if ($links != "no")
+    {{ $owners->links("pagination::bootstrap-4") }}
+@else
+    
+@endif

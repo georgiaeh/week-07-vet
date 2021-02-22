@@ -17,7 +17,7 @@
     </header>
 
     <main class="mt-4">
-        @yield("main")
+        @yield("content")
     </main>
 
     <footer class="mt-4 navbar navbar-light bg-light">
