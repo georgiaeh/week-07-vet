@@ -55,9 +55,9 @@ class Owner extends Model
     public function fullAddress() : string
     {
         return 
-            "{$this->address_1}, \n 
-            {$this->address_2}, \n 
-            {$this->town}, \n
+            "{$this->address_1}, 
+            {$this->address_2}, 
+            {$this->town},
             {$this->postcode}";
             //other way to do it, which better deals with blank fields:
             //put in to array, remove blank values, 

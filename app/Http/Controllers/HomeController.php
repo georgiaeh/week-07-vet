@@ -17,18 +17,18 @@ class HomeController extends Controller
     {
         $currentHour = Carbon::now()->hour;
         if($currentHour >= 0 && $currentHour < 12){
-            return "Good morning {$this->user()}";
+            return "Good morning, {$this->user()}";
         } else if($currentHour >= 12 && $currentHour < 18){
-            return "Good afternoon {$this->user()}";
+            return "Good afternoon, {$this->user()}";
         } else {
-            return "Good evening {$this->user()}";
+            return "Good evening, {$this->user()}";
         }
     }
 
     public function user()
     {
         $user = Auth::user();
-        return $user->name;
+        return ucfirst($user->name);
     }
 
 }

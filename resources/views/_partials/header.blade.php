@@ -3,6 +3,13 @@
     <a class="navbar-brand" href="/">Services</a>
     <a class="navbar-brand" href="/owners">Owners</a>
     <a class="navbar-brand" href="/">Pets</a>
-    <p>Logged in as: {{$user}}</p>
 </nav>
-
+<div class="bg-light">
+@if(Auth::user())
+        <p class="navbar-brand">Logged in as: <a href="/users/{{ Auth::user()->id }}">{{Auth::user()->name}}</a></p> 
+    @else
+        <p class="navbar-brand"> Not logged in </p>
+    @endif
+   
+    <a href="{{ url('/logout') }}" class="btn btn-primary"> Logout </a>
+</div>
