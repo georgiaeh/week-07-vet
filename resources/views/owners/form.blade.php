@@ -1,6 +1,6 @@
 @extends("app")
 
-@section("main")
+@section("content")
     
     <form method="post" class="form card">
         @csrf

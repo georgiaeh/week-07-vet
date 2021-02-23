@@ -38,6 +38,11 @@ class OwnerController extends Controller
         return redirect("owners/{$owner}");
     }
 
+    public function show(Owner $owner)
+    {
+        return view("owners/show", ["owner" => $owner]);
+    }
+
     public function search(Request $request)
     {
         $search = $request->search; //string of search term
@@ -54,10 +59,5 @@ class OwnerController extends Controller
         return view("owners", ["owners" => $owners, "links" => "no"]);
 
         //links => no to stop the pagination links from showing because it doesn't work when $owners is passed to the view for some reason. Can't call pagination method on owners? Need to look in to this some more
-    }
-
-    public function show(Owner $owner)
-    {
-        return view("owners/show", ["owner" => $owner]);
     }
 }
