@@ -75,4 +75,9 @@ class Owner extends Model
         $formattedNum .= implode("", array_slice($numberArray, 7, 4));
         return $formattedNum;
     }
+
+    public function animals()
+    {
+        return $this->hasMany(Animal::class);
+    }
 }
