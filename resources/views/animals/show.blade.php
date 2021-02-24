@@ -22,3 +22,7 @@
 <h6> Owner: <a href="/owners/{{$animal->owner->id}}">{{$animal->owner->fullName()}} <a></h6>
 
 @endsection
+
+@section("title")
+    {{$animal->name}}
+@endsection

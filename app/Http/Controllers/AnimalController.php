@@ -23,9 +23,7 @@ class AnimalController extends Controller
 
     public function edit(Owner $owner, Animal $animal)
     {
-        
-        return view("animals/form", ["animal" => $animal, "view" => "edit"]);
-        
+        return view("animals/form", ["animal" => $animal, "view" => "edit"]);   
     }
 
     public function editPost()

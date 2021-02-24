@@ -11,6 +11,13 @@ class Owner extends Model
 
     protected $fillable = ["first_name", "last_name", "telephone", "email", "address_1", "address_2", "town", "postcode"];
 
+    //----- Eloquent ORM Methods ------
+    public function animals()
+    {
+        return $this->hasMany(Animal::class);
+    }
+
+    //----- Static Functions ------------------------------------------
     public static function emailExists($email) : bool
     {
         $dbSearchForEmail = Owner::where('email', $email)->get()->count();
@@ -33,7 +40,6 @@ class Owner extends Model
         } else {
             return false;
         }
-        
     }
 
     public static function haveWeBananas($number)
@@ -47,6 +53,7 @@ class Owner extends Model
         return "Yes we have {$number} bananas";
     }
 
+    //----- Model methods ------------------------------------
     public function fullName() : string
     {
         return "{$this->first_name} {$this->last_name}";
@@ -74,10 +81,5 @@ class Owner extends Model
         $formattedNum .= " ";
         $formattedNum .= implode("", array_slice($numberArray, 7, 4));
         return $formattedNum;
-    }
-
-    public function animals()
-    {
-        return $this->hasMany(Animal::class);
     }
 }
