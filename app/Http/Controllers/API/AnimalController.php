@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Owner;
 use App\Models\Animal;
 use App\Http\Resources\API\AnimalResource;
+use App\Http\Requests\API\AnimalRequest;
 
 class AnimalController extends Controller
 {
@@ -26,7 +27,7 @@ class AnimalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Owner $owner)
+    public function store(AnimalRequest $request, Owner $owner)
     {
         $data = $request->all();
 
@@ -47,7 +48,7 @@ class AnimalController extends Controller
      */
     public function show(Owner $owner, Animal $animal)
     {
-        return AnimalResource($animal);
+        return new AnimalResource($animal);
     }
 
     /**
@@ -57,7 +58,7 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Owner $owner, Animal $animal)
+    public function update(AnimalRequest $request, Owner $owner, Animal $animal)
     {
         $data = $request->all();
 

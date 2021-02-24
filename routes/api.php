@@ -30,7 +30,9 @@ Route::delete('/owners/{owner}/delete', [OwnerController::class, "destroy"]);
 // -------------------- API Routes for Animals --------------------------------
 
 Route::get('/owners/{owner}/animals', [AnimalController::class, "index" ]); //GET -> list of all animals belonging to owner
-Route::get('/owners/{owner}/animals/{animal}', [AnimalController::class, "show" ]); //GET ->specific animal belonging to owner 
 Route::post('/owners/{owner}/animals', [AnimalController::class, "store"]); //POST -> add to the animals which belong to the owner
-Route::put('/owners/{owner}/animals/{animal}', [AnimalController::class, "update" ]);// PUT -> update details of the animal
-Route::delete('/owners/{owner}/animals/{animal}', [AnimalController::class, "destroy" ]); // DELETE -> delete the animal
+Route::group(["middleware" => "check.owner"], function(){
+    Route::get('/owners/{owner}/animals/{animal}', [AnimalController::class, "show" ]); //GET ->specific animal belonging to owner 
+    Route::put('/owners/{owner}/animals/{animal}', [AnimalController::class, "update" ]);// PUT -> update details of the animal
+    Route::delete('/owners/{owner}/animals/{animal}', [AnimalController::class, "destroy" ]); // DELETE -> delete the animal
+});

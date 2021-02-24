@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
@@ -15,7 +16,7 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+ //------------------ Routes for Owners --------------------------
 Route::group(["prefix" => "owners"] , function () {
     Route::group(["middleware" => "auth"], function(){//protects the following routes, have to be authenticates to access them
         Route::get('', [OwnerController::class, "index"]);
@@ -28,15 +29,29 @@ Route::group(["prefix" => "owners"] , function () {
     });
 });
  
+//------------------ Routes for Animals --------------------------
+Route::group(["prefix" => "owners/{owner}/animals"] , function () {
+    Route::group(["middleware" => "auth"], function(){
+        Route::get('create', [AnimalController::class, "create"]); //create new animal
+        Route::post('create', [AnimalController::class, "createPost"]); //shows created animal
+        Route::get('{animal}', [AnimalController::class, "show"]); // shows details of animal for certain owner
+        Route::get('{animal}/edit', [AnimalController::class, "edit"]); // edits animal
+        Route::post('{animal}/edit', [AnimalController::class, "editPost"]);  //shows edited animal
+    });
+});
 
+
+
+//------------------ Route Homepage --------------------------
 Route::get('/', [HomeController::class, "index"])->middleware('auth');
 
 Auth::routes(['register'=>false]);
 
+
+
+//------------------ Routes for Users --------------------------
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-
 Route::group(["prefix" => "users"] , function () { 
     Route::group(["middleware" => "auth"], function(){
         Route::get('/', [UserController::class, "index"]);
