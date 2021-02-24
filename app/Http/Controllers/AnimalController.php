@@ -9,6 +9,12 @@ use App\Http\Requests\AnimalRequest;
 
 class AnimalController extends Controller
 {
+
+    public function index()
+    {
+        return view("animals", ["animals" => Animal::all()->sortBy("name")]);
+    }
+
     public function create()
     {
         return view("animals/form", ["view" => "create"]);
@@ -26,9 +32,11 @@ class AnimalController extends Controller
         return view("animals/form", ["animal" => $animal, "view" => "edit"]);   
     }
 
-    public function editPost()
+    public function editPost(AnimalRequest $request, Owner $owner, Animal $animal)
     {
-
+        $data = $request->all();
+        $record = Animal::find($animal->id)->fill($data)->save();
+        return redirect("owners/{$owner->id}/animals/{$animal->id}");
     }
 
     public function show(Owner $owner, Animal $animal)

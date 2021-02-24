@@ -39,17 +39,15 @@ Route::group(["prefix" => "owners/{owner}/animals"] , function () {
         Route::post('{animal}/edit', [AnimalController::class, "editPost"]);  //shows edited animal
     });
 });
+Route::get('/animals', [AnimalController::class, "index"]); //show list of all animals
 
 
-
-//------------------ Route Homepage --------------------------
+//------------------ Route to Homepage --------------------------
 Route::get('/', [HomeController::class, "index"])->middleware('auth');
-
-Auth::routes(['register'=>false]);
-
 
 
 //------------------ Routes for Users --------------------------
+Auth::routes(['register'=>false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::group(["prefix" => "users"] , function () { 
