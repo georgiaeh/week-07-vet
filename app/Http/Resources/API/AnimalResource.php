@@ -14,6 +14,14 @@ class AnimalResource extends JsonResource
      */
     public function toArray($request)
     {
+        $treatments = $this->treatments;
+
+        $treatmentsarr = [];
+
+        foreach($treatments as $treatment){
+            $treatmentsarr[] = [$treatments->pluck("pivot")->pluck("date_given"), $treatments->pluck("name")];
+        };
+        
         return [
             "id" => $this->id,
             "name" => $this->name,
@@ -23,6 +31,7 @@ class AnimalResource extends JsonResource
             "height" => $this->height,
             "dangerous" => $this->dangerous(),
             "owner_name" => $this->owner->fullName(),
+            "treatments" => $treatmentsarr,
         ];
     }
 }

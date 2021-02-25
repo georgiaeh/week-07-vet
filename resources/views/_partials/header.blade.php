@@ -2,7 +2,7 @@
     <a class="navbar-brand" href="/">Home</a>
     <a class="navbar-brand" href="/">Services</a>
     <a class="navbar-brand" href="/owners">Owners</a>
-    <a class="navbar-brand" href="/">Pets</a>
+    <a class="navbar-brand" href="/animals">Pets</a>
 </nav>
 <div class="bg-light">
 @if(Auth::user())

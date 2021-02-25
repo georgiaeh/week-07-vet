@@ -19,7 +19,7 @@ class Animal extends Model
 
     public function treatments()
     {
-        return $this->belongsToMany(Treatment::class);
+        return $this->belongsToMany(Treatment::class)->withPivot("date_given");
     }
 
     public function setTreatments(array $strings)

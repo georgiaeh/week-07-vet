@@ -29,7 +29,9 @@ class AnimalRequest extends FormRequest
             "dob" => ["required", "date"],
             "weight" => ["required", "numeric"],
             "height" => ["required", "numeric"],
-            "biteyness" => ["required", "integer","between:0,6"]
+            "biteyness" => ["required", "integer","between:0,6"],
+            "treatments" => ["array"],
+            "treatments.*" => ["string", "max:50"]
         ];
     }
 }

@@ -10,12 +10,12 @@ class Treatment extends Model
     use HasFactory;
 
     public $timestamps = false;
-    // protected $fillable
+    protected $fillable = ["name"];
 
     //----- Eloquent ORM Methods ------
     public function animals()
     {
-        return $this->belongsToMany(Animal::class);
+        return $this->belongsToMany(Animal::class)->withPivot("date_given");
     }
 
     //----- Static Functions ------
