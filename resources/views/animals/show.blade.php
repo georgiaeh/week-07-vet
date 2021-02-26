@@ -13,13 +13,21 @@
     <li class ="list-group-item" >Height: {{$animal->height}}cm</li>
     <li class ="list-group-item" >Dangerous: {{$animal->dangerous()}}</li> 
 </ul>
-
-<ul class="list-group">
-    <li class="list-group-item">Treatments: {{$animal->treatments}}</li>
-</ul>
 <br>
 
 <a href="/owners/{{$animal->owner->id}}/animals/{{$animal->id}}/edit" class="btn btn-primary">Edit {{$animal->name}}'s Details</a>
+<br>
+<br>
+
+<h5>Treatments</h5>
+<ul class="list-group">
+    @foreach( $animal->treatments as $treatment)
+    <li class="list-group-item">Date: {{$treatment->pivot->date_given}} Treatment: {{$treatment->name}}</li>
+    @endforeach
+</ul>
+
+<br>
+<a href="/owners/{{$animal->owner->id}}/animals/{{$animal->id}}/treatment" class="btn btn-primary">Add Treatment for {{$animal->name}}</a>
 <br>
 <br>
 

@@ -6,6 +6,7 @@ use App\Models\Animal;
 use App\Models\Owner;
 use Illuminate\Http\Request;
 use App\Http\Requests\AnimalRequest;
+use App\Http\Requests\TreatmentRequest;
 
 class AnimalController extends Controller
 {
@@ -39,10 +40,21 @@ class AnimalController extends Controller
         return redirect("owners/{$owner->id}/animals/{$animal->id}");
     }
 
+    public function treatment(Owner $owner, Animal $animal)
+    {
+        return view("animals/treatmentform", ["animal" => $animal]); 
+    }
+
+    public function treatmentPost(TreatmentRequest $request, Owner $owner, Animal $animal)
+    {
+        $treatment = [$request->treatment];
+        $dategiven = $request->date_given;
+        $animal = Animal::find($animal->id)->setTreatments($treatment, $dategiven);
+        return redirect("owners/{$owner->id}/animals/{$animal->id}");
+    }
+
     public function show(Owner $owner, Animal $animal)
     {
         return view("animals/show", ["animal" => $animal, "owner" => $owner]);
     }
-
-
 }

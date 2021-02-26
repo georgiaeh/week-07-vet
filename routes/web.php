@@ -37,9 +37,11 @@ Route::group(["prefix" => "owners/{owner}/animals"] , function () {
         Route::get('{animal}', [AnimalController::class, "show"]); // shows details of animal for certain owner
         Route::get('{animal}/edit', [AnimalController::class, "edit"]); // edits animal
         Route::post('{animal}/edit', [AnimalController::class, "editPost"]);  //shows edited animal
+        Route::get('{animal}/treatment', [AnimalController::class, "treatment"]);
+        Route::post('{animal}/treatment', [AnimalController::class, "treatmentPost"]);//add new treatment for animal
     });
 });
-Route::get('/animals', [AnimalController::class, "index"]); //show list of all animals
+Route::get('/animals', [AnimalController::class, "index"]); //show list of all animals at the practice
 
 
 //------------------ Route to Homepage --------------------------
