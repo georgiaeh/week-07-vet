@@ -11,7 +11,11 @@
     <li class ="list-group-item" >Species: {{$animal->species}}</li>
     <li class ="list-group-item" >Weight: {{$animal->weight}}kg</li>
     <li class ="list-group-item" >Height: {{$animal->height}}cm</li>
-    <li class ="list-group-item" >Dangerous: {{$animal->dangerous()}}</li> {{--Not displaying ture or false yet--}}
+    <li class ="list-group-item" >Dangerous: {{$animal->dangerous()}}</li> 
+</ul>
+
+<ul class="list-group">
+    <li class="list-group-item">Treatments: {{$animal->treatments}}</li>
 </ul>
 <br>
 

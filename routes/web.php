@@ -48,6 +48,7 @@ Route::get('/', [HomeController::class, "index"])->middleware('auth');
 
 //------------------ Routes for Users --------------------------
 Auth::routes(['register'=>false]);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::group(["prefix" => "users"] , function () { 

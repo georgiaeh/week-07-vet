@@ -30,23 +30,18 @@ class AnimalController extends Controller
     public function store(AnimalRequest $request, Owner $owner)
     {
         $data = $request->all();
-        $treatments = $request->get("treatments");
+        
 
         $animal = new Animal($data);
         $animal->owner()->associate($owner);
         $animal->save();
-        $animal->setTreatments($treatments); //setTreatments come after saving as saving creates the animal ID which is required for the animal_treatment pivot table
-        
 
-        //Adding date treatment given to pivot table
-        $treatmentCollection = $animal->treatments->all();
-
+        $treatments = $request->get("treatments");
         $dategiven = $request->get("date_given");
-
-        foreach( $treatmentCollection as $treatment){
-            $id = $treatment->id;
-            $animal->treatments()->updateExistingPivot($id, ["date_given" => $dategiven]);
+        if(is_null($treatments) === false ){
+            $animal->setTreatments($treatments, $dategiven);
         }
+        
         
         return new AnimalResource($animal);
     }
@@ -72,20 +67,14 @@ class AnimalController extends Controller
     public function update(AnimalRequest $request, Owner $owner, Animal $animal)
     {
         $data = $request->all();
-
         $animal->fill($data);
         $animal->save();
 
-        //Attaching new data to pivot table -> attach as updateExisting will overwrite data
-        $treatmentCollection = $animal->treatments->all();
-
+        $treatments = $request->get("treatments");
         $dategiven = $request->get("date_given");
-
-        foreach( $treatmentCollection as $treatment){
-            $id = $treatment->id;
-            $animal->treatments()->attach($id, ["date_given" => $dategiven]);
+        if(is_null($treatments) === false ){
+            $animal->setTreatments($treatments, $dategiven);
         }
-
 
         return new AnimalResource($animal);
     }

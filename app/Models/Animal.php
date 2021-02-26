@@ -22,10 +22,10 @@ class Animal extends Model
         return $this->belongsToMany(Treatment::class)->withPivot("date_given");
     }
 
-    public function setTreatments(array $strings)
+    public function setTreatments(array $strings, $dategiven)
     {
         $treatments = Treatment::fromStrings($strings);
-        $this->treatments()->sync($treatments->pluck("id"));
+        $this->treatments()->attach($treatments->pluck("id"), ["date_given" => $dategiven]);
         return $this;
     }
 
@@ -35,7 +35,12 @@ class Animal extends Model
     //----- Model methods ----------
     public function dangerous()
     {
-        return $this->biteyness >= 3;
+        if($this->biteyness >= 3){
+            return "True. Biteyness: {$this->biteyness}";
+        } else {
+            return "False. Biteyness: {$this->biteyness}";
+        }
+        
     }
 
     

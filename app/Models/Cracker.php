@@ -46,7 +46,6 @@ class Cracker extends Model
                 $position = array_search( $letter, $keyArray);
                 $decryptedArray [] = $alphabetArray[$position];
             }
-            
         }
 
         return implode($decryptedArray);
